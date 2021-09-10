@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Books</title>
+		<link rel="stylesheet" href="main.css" />
+		<meta charset="UTF-8" />
+		<meta name="viewport"content="width=device-width, initial-scale=1.0" />
+		
+		<script>
+			var base = "http://localhost:3000/books";
+			function loadBooks(){
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.open('GET',base,true);
+				xmlhttp.onreadystatechange = function(){
+					if(xmlhttp.readyState===4 && xmlhttp.status===200){
+					var books = JSON.parse(xmlhttp.responseText);
+					console.log(books);
+					var tbltop = '<table><tr><th>Book Name</th><th>Author</th><th>Price</th></tr>';
+					var main = "";
+					for(r in books){
+						main += "<tr><td>"+books[r].name+"</td><td>"+books[r].author+"</td><td>"+books[r].price+"</td></tr>"
+					}
+					var tblbottom = "</table>";
+					var tbl = tbltop + main + tblbottom;
+					document.getElementById('bookinfo').innerHTML = tbl;
+				}
+			};
+			xmlhttp.send();
+			}
+			window.onload = function(){
+				loadBooks();
+			}
+		</script>
+
+	</head>
+	<body>
+		<div class="header" id="myHeader">
+			<h2>Books Information</h2>
+		  </div>
+		<div id="bookinfo"></div>		
+	</body>
+</html>
