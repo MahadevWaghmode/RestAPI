@@ -38,5 +38,17 @@ router.post('/', async(req,res)=>{
     }
 })
 
+router.patch('/:id',async(req,res)=>{
+    try{
+        const book = await Book.findById(req.params.id)
+        book.price = req.body.price
+        const a1 = await book.save()
+        res.json(a1)
+    }
+    catch(err){
+        res.send(err)
+    }
+})
+
 
 module.exports = router

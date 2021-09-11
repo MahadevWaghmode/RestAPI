@@ -14,11 +14,11 @@
 				xmlhttp.onreadystatechange = function(){
 					if(xmlhttp.readyState===4 && xmlhttp.status===200){
 					var books = JSON.parse(xmlhttp.responseText);
-					console.log(books);
-					var tbltop = '<table><tr><th>Book Name</th><th>Author</th><th>Price</th></tr>';
+					//console.log(books);
+					var tbltop = '<table><tr><th>Id</th><th>Book Name</th><th>Author</th><th>Price</th></tr>';
 					var main = "";
 					for(r in books){
-						main += "<tr><td>"+books[r].name+"</td><td>"+books[r].author+"</td><td>"+books[r].price+"</td></tr>"
+						main += "<tr><td>"+books[r]._id+"</td><td>"+books[r].name+"</td><td>"+books[r].author+"</td><td>"+books[r].price+"</td></tr>"
 					}
 					var tblbottom = "</table>";
 					var tbl = tbltop + main + tblbottom;
@@ -37,6 +37,21 @@
 		<div class="header" id="myHeader">
 			<h2>Books Information</h2>
 		  </div>
-		<div id="bookinfo"></div>		
+		<div class="content" id="bookinfo"></div>	
+		
+		<script>
+			window.onscroll = function() {myFunction()};
+			
+			var header = document.getElementById("myHeader");
+			var sticky = header.offsetTop;
+			
+			function myFunction() {
+			  if (window.pageYOffset > sticky) {
+				header.classList.add("sticky");
+			  } else {
+				header.classList.remove("sticky");
+			  }
+			}
+			</script>
 	</body>
 </html>
